@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Pokedex.Application.Core.Entities;
+using System.Threading.Tasks;
 
-namespace Pokedex.API.Services
+namespace Pokedex.Application.Core.Services
 {
     public interface IPokemonService
     {

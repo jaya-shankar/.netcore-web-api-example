@@ -1,9 +1,8 @@
-﻿namespace Pokedex.API.Services
+﻿namespace Pokedex.API.Models
 {
-    public class PokemonEntity
+    public class PokemonModel
     {
         public string Description { get; set; }
-        public bool Exists { get; set; }
         public string Habitat { get; set; }
         public bool IsLegendary { get; set; }
         public string Name { get; set; }

@@ -1,13 +1,14 @@
-﻿using Pokedex.API.Clients.FunTranslations;
-using Pokedex.API.Clients.FunTranslations.Models;
-using Pokedex.API.Clients.PokeAPI;
-using Pokedex.API.Clients.PokeAPI.Models;
+﻿using Pokedex.Application.Core.Clients.FunTranslations;
+using Pokedex.Application.Core.Clients.FunTranslations.Models;
+using Pokedex.Application.Core.Clients.PokeAPI;
+using Pokedex.Application.Core.Clients.PokeAPI.Models;
+using Pokedex.Application.Core.Entities;
 using Refit;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Pokedex.API.Services
+namespace Pokedex.Application.Core.Services
 {
     public class PokemonService : IPokemonService
     {
@@ -22,7 +23,7 @@ namespace Pokedex.API.Services
 
         public async Task<PokemonEntity> GetPokemonAsync(string name)
         {
-            ApiResponse<Pokemon> _Response = await __PokeAPIClient.GetSpeciesAsync(name);
+            ApiResponse<Pokemon> _Response = await __PokeAPIClient.GetSpeciesAsync(name.ToLower());
 
             if (_Response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -43,7 +44,7 @@ namespace Pokedex.API.Services
 
         public async Task<PokemonEntity> GetTranslatedPokemonAsync(string name)
         {
-            PokemonEntity _Pokemon = await GetPokemonAsync(name);
+            PokemonEntity _Pokemon = await GetPokemonAsync(name.ToLower());
 
             if (_Pokemon.Exists)
             {

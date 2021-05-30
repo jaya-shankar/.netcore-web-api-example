@@ -1,8 +1,8 @@
-﻿using Pokedex.API.Clients.FunTranslations.Models;
+﻿using Pokedex.Application.Core.Clients.FunTranslations.Models;
 using Refit;
 using System.Threading.Tasks;
 
-namespace Pokedex.API.Clients.FunTranslations
+namespace Pokedex.Application.Core.Clients.FunTranslations
 {
     public interface IFunTranslationsClient
     {

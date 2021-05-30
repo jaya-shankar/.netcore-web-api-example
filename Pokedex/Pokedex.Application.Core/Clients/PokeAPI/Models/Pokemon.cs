@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Pokedex.API.Clients.PokeAPI.Models
+namespace Pokedex.Application.Core.Clients.PokeAPI.Models
 {
     public class Pokemon
     {

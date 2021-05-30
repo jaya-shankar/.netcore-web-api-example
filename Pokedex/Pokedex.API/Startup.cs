@@ -1,14 +1,12 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Pokedex.API.Clients.FunTranslations;
-using Pokedex.API.Clients.PokeAPI;
-using Pokedex.API.Services;
-using Refit;
-using System;
+using Pokedex.Application.Core;
+using Pokedex.Infrastructure;
 
 namespace Pokedex.API
 {
@@ -19,7 +17,6 @@ namespace Pokedex.API
             Configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -41,7 +38,6 @@ namespace Pokedex.API
             });
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -51,15 +47,17 @@ namespace Pokedex.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pokedex.API", Version = "v1" });
             });
 
-            services.AddScoped<IPokemonService, PokemonService>();
+            // AutoMapper Configuration
+            MapperConfiguration mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
 
-            services
-                .AddRefitClient<IPokeAPIClient>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://pokeapi.co/api/v2"));
+            services.AddSingleton(mapperConfig.CreateMapper());
 
-            services
-                .AddRefitClient<IFunTranslationsClient>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.funtranslations.com"));
+            services.AddApplicationServices();
+            services.AddInfrastructureServices();
+
         }
 
         public IConfiguration Configuration { get; }

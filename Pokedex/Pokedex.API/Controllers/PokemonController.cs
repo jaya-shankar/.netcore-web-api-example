@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Pokedex.API.Services;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Pokedex.API.Models;
+using Pokedex.Application.Core.Entities;
+using Pokedex.Application.Core.Services;
 using System.Threading.Tasks;
 
 namespace Pokedex.API.Controllers
@@ -8,11 +11,13 @@ namespace Pokedex.API.Controllers
     [Route("pokemon")]
     public class PokemonController : ControllerBase
     {
+        private readonly IMapper __Mapper;
         private readonly IPokemonService __PokemonService;
 
-        public PokemonController(IPokemonService pokemonService)
+        public PokemonController(IPokemonService pokemonService, IMapper mapper)
         {
             __PokemonService = pokemonService;
+            __Mapper = mapper;
         }
 
         [HttpGet("{name}")]
@@ -22,7 +27,7 @@ namespace Pokedex.API.Controllers
 
             if (_Entity.Exists)
             {
-                return Ok(_Entity);
+                return Ok(__Mapper.Map<PokemonModel>(_Entity));
             }
 
             return NotFound();
@@ -35,7 +40,7 @@ namespace Pokedex.API.Controllers
 
             if (_Entity.Exists)
             {
-                return Ok(_Entity);
+                return Ok(__Mapper.Map<PokemonModel>(_Entity));
             }
 
             return NotFound();
