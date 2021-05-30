@@ -4,8 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Pokedex.API.Services.FunTranslations;
-using Pokedex.API.Services.PokeAPI;
+using Pokedex.API.Clients.FunTranslations;
+using Pokedex.API.Clients.PokeAPI;
+using Pokedex.API.Services;
 using Refit;
 using System;
 
@@ -49,6 +50,8 @@ namespace Pokedex.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pokedex.API", Version = "v1" });
             });
+
+            services.AddScoped<IPokemonService, PokemonService>();
 
             services
                 .AddRefitClient<IPokeAPIClient>()

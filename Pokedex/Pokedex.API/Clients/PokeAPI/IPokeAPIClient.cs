@@ -1,8 +1,8 @@
-﻿using Pokedex.API.Services.PokeAPI.Models;
+﻿using Pokedex.API.Clients.PokeAPI.Models;
 using Refit;
 using System.Threading.Tasks;
 
-namespace Pokedex.API.Services.PokeAPI
+namespace Pokedex.API.Clients.PokeAPI
 {
     public interface IPokeAPIClient
     {

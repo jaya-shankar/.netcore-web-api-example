@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Pokedex.API.Services.PokeAPI.Models
+namespace Pokedex.API.Clients.PokeAPI.Models
 {
     public class Language
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Pokedex.API.Services.FunTranslations.Models
+namespace Pokedex.API.Clients.FunTranslations.Models
 {
     public class TranslationRequest
     {
