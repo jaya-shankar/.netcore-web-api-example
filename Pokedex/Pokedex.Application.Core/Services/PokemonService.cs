@@ -38,7 +38,7 @@ namespace Pokedex.Application.Core.Services
 
             if (!_Response.IsSuccessStatusCode)
             {
-                // Could also log here to monitor any external service failures + exceptions.
+                // Could also log here instead to monitor any external service failures + exceptions.
                 throw new Exception($"PokeAPI Service Exception - {_Response.StatusCode}", _Response.Error);
             }
 

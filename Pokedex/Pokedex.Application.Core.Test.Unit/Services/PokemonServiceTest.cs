@@ -94,10 +94,7 @@ namespace Pokedex.Application.Core.Test.Unit.Services
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public async Task PokemonService_GetPokemonAsync_EmptyName_ShouldThrowException()
-        {
-            await __PokemonService.GetPokemonAsync(string.Empty);
-        }
+        public async Task PokemonService_GetPokemonAsync_EmptyName_ShouldThrowException() => await __PokemonService.GetPokemonAsync(string.Empty);
 
         [TestMethod]
         public async Task PokemonService_GetPokemonAsync_Exists_ShouldReturnEnglishDescription()
@@ -171,10 +168,7 @@ namespace Pokedex.Application.Core.Test.Unit.Services
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public async Task PokemonService_GetTranslatedPokemonAsync_EmptyName_ShouldThrowException()
-        {
-            await __PokemonService.GetTranslatedPokemonAsync(string.Empty);
-        }
+        public async Task PokemonService_GetTranslatedPokemonAsync_EmptyName_ShouldThrowException() => await __PokemonService.GetTranslatedPokemonAsync(string.Empty);
 
         [TestMethod]
         public async Task PokemonService_GetTranslatedPokemonAsync_IsLegendary_ShouldApplyYodaTranslation()
