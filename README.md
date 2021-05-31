@@ -175,11 +175,13 @@ Currently, if FunTranslation service fails due to rate-limit, then we fallback t
 
 Perhaps for this case, a simple retry policy with default fallback and logging should be good enough.
 
+More information: https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/
+
 **Monitoring**
 
 Having a monitoring solution in place is extremely important for any deployed production service. What kind of monitoring platform we use largely depends on the overall system architecture and where it's deployed to. 
 
-If deployed to azure app service or container instances, we can use Azure Application Insights. If we're deploying to microservices in a cluster, we can use Prometheue.
+If deployed to azure app service or container instances, we can use Azure Application Insights. If we're deploying to microservices in a cluster, we can use Prometheus.
 
 It's important we are able to monitor and detect any performance issues, failures, exceptions, memory usage etc. 
 
