@@ -163,6 +163,10 @@ The cache can be in-memory of the app or using an internal service like Reddis.
 
 The input request models don't have any validation at the moment. It works with both id (int) and name (string). Having some validation of the input models before passing the data into inner layers or external systems is a good safety measure.
 
+**PokeAPI Response Model Deserialization**
+
+Currently some values like language, habitat are stored as string. In code to verify we're doing something like `.Language == "en"` and `.Habitat == "cave"`. It would be an improvement to see if we can map these strings to Enum when we deserialize, so we don't have to hardcode such strings in code.
+
 **Making it Resilient**
 
 When making calls to anything outside of our application such as external thrid party services or data sources, our application has to be fault tolerant. Dependent services can be down, fail, rate limited etc. We need to handle our logic to either fallback to a default value, have a retry policy with a circuit breaker pattern or design internal systems with asynchronous communication that use message queues. 

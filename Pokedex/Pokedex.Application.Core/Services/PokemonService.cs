@@ -45,7 +45,7 @@ namespace Pokedex.Application.Core.Services
             return new()
             {
                 Exists = true,
-                Description = _Response.Content.Descriptions?.Where(d => d.Language.Name == "en").FirstOrDefault()?.Value?.Replace("\n", "") ?? string.Empty,
+                Description = _Response.Content.Descriptions?.Where(d => d.Language.Name == "en").FirstOrDefault()?.Value?.Replace("\n", " ") ?? string.Empty,
                 Name = _Response.Content.Name,
                 Habitat = _Response.Content.Habitat.Name,
                 IsLegendary = _Response.Content.IsLegendary
