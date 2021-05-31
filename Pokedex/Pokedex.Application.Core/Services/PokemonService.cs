@@ -4,6 +4,7 @@ using Pokedex.Application.Core.Clients.PokeAPI;
 using Pokedex.Application.Core.Clients.PokeAPI.Models;
 using Pokedex.Application.Core.Entities;
 using Refit;
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -21,16 +22,25 @@ namespace Pokedex.Application.Core.Services
             __FunTranslationsClient = funTranslationsClient;
         }
 
-        public async Task<PokemonEntity> GetPokemonAsync(string name)
+        public async Task<PokemonEntity> GetPokemonAsync(string pokemonName)
         {
-            ApiResponse<Pokemon> _Response = await __PokeAPIClient.GetSpeciesAsync(name.ToLower());
+            if (string.IsNullOrEmpty(pokemonName))
+            {
+                throw new ArgumentNullException(nameof(pokemonName));
+            }
+
+            IApiResponse<Pokemon> _Response = await __PokeAPIClient.GetSpeciesAsync(pokemonName.ToLower());
 
             if (_Response.StatusCode == HttpStatusCode.NotFound)
             {
                 return new();
             }
 
-            await _Response.EnsureSuccessStatusCodeAsync();
+            if (!_Response.IsSuccessStatusCode)
+            {
+                // Could also log here to monitor any external service failures + exceptions.
+                throw new Exception($"PokeAPI Service Exception - {_Response.StatusCode}", _Response.Error);
+            }
 
             return new()
             {
@@ -46,14 +56,14 @@ namespace Pokedex.Application.Core.Services
         {
             PokemonEntity _Pokemon = await GetPokemonAsync(name.ToLower());
 
-            if (_Pokemon.Exists)
+            if (_Pokemon.Exists && !string.IsNullOrEmpty(_Pokemon.Description))
             {
                 TranslationRequest _Request = new()
                 {
                     Text = _Pokemon.Description
                 };
 
-                ApiResponse<TranslationResponse> _Response = _Pokemon.Habitat.ToLower() == "cave" || _Pokemon.IsLegendary ? await __FunTranslationsClient.ToYodaAsync(_Request) : await __FunTranslationsClient.ToShakespeareAsync(_Request);
+                IApiResponse<TranslationResponse> _Response = _Pokemon.Habitat.ToLower() == "cave" || _Pokemon.IsLegendary ? await __FunTranslationsClient.ToYodaAsync(_Request) : await __FunTranslationsClient.ToShakespeareAsync(_Request);
 
                 if (_Response.IsSuccessStatusCode)
                 {
