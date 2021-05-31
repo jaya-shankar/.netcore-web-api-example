@@ -18,7 +18,8 @@ namespace Pokedex.Application.Core.Test.Unit.Services
     public class PokemonServiceTest
     {
         private const string CAVE_HABITAT = "cave";
-        private const string ORIGINAL_DESCRIPTION = "This is a description";
+        private const string ORIGINAL_DESCRIPTION = "This is a \ndescription";
+        private const string EXPECTED_DESCRIPTION = "This is a description";
         private const string POKEMON_NAME = "pikachu";
         private const string TRANSLATED_DESCIRPTION = "Translated description, this is.";
         private const string URBAN_HABITAT = "urban";
@@ -106,7 +107,7 @@ namespace Pokedex.Application.Core.Test.Unit.Services
             Assert.IsTrue(_Entity.Exists);
             Assert.AreEqual(POKEMON_NAME, _Entity.Name);
             Assert.AreEqual(CAVE_HABITAT, _Entity.Habitat);
-            Assert.AreEqual(ORIGINAL_DESCRIPTION, _Entity.Description);
+            Assert.AreEqual(EXPECTED_DESCRIPTION, _Entity.Description);
         }
 
         [TestMethod]
@@ -206,7 +207,7 @@ namespace Pokedex.Application.Core.Test.Unit.Services
 
             PokemonEntity _Entity = await __PokemonService.GetTranslatedPokemonAsync(POKEMON_NAME);
 
-            Assert.AreEqual(ORIGINAL_DESCRIPTION, _Entity.Description);
+            Assert.AreEqual(EXPECTED_DESCRIPTION, _Entity.Description);
 
             __FunTranslationsClientMock.Verify(m => m.ToYodaAsync(It.IsAny<TranslationRequest>()), Times.Once);
         }
