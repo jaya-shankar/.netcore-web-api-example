@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  pokedex-api:
+    container_name: pokedex-api
+    build:
+      context: ./Pokedex
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"

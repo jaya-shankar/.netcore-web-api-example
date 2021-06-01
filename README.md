@@ -7,6 +7,10 @@
 		<b>Simple .NET 5 implementation of a service that provides pokemon information. 👾</b>
 	</p>
     <br>
+    <a href="https://www.codacy.com/gh/rithinch/.netcore-web-api-example/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rithinch/.netcore-web-api-example&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/3b850ea67d164757af491bc1f9ba7b46"/></a>
+    <br>
+    <br>
+    <br>
 </div>
 
 This repo contains an example of a REST API implemented in .NET Core using clean architecture principles and containerized with Docker. The service was developed keeping a pokemon domain in mind, but the principles used can easily be applied to design .NET Core based web APIs for any domain. For simplicity, we're using [PokeAPI](https://pokeapi.co/) to retrive pokemon information instead of a custom database.  
@@ -27,14 +31,14 @@ We first need to get a local copy of this repository either by cloning or downlo
 
 If you want to run the app without using command line, you can open the `Pokedex.sln` file and directly run in Visual Studio.
 
-Once you have a localy copy, open up your terminal/command prompt at the **root** of this repo and navigate to the `Pokedex` solution folder.
+Once you have a localy copy, open up your terminal/command prompt at the **root** of this repo.
 
 ### Dotnet CLI
 
 The following commands will launch the app on http://localhost:5000
 
 ```bash
-> cd Pokedex.API
+> cd Pokedex/Pokedex.API
 > dotnet run
 ```
 
@@ -42,7 +46,14 @@ The following commands will launch the app on http://localhost:5000
 
 The following commands will build the image and run the app in a docker container.
 
+**Docker Compose**
 ```bash
+> docker compose up
+```
+**Individual Dockerfile**
+
+```bash
+> cd Pokedex
 > docker build -t pokedex-api .
 > docker run -it --rm -p 5000:80 pokedex-api
 ```
@@ -151,7 +162,7 @@ The tests can be run either through Visual Studio or dotnet CLI.
 
 ... Not yet. 
 
-The following a few things to consider adding before taking this to production. 
+The following are a few things to consider adding before taking this to production. 
 
 **External Services Response Caching**
 
