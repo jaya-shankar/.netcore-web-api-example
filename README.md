@@ -7,6 +7,10 @@
 		<b>Simple .NET 5 implementation of a service that provides pokemon information. 👾</b>
 	</p>
     <br>
+    <a href="https://github.com/rithinch/.netcore-web-api-example/actions/workflows/dotnet.yml"><img src="https://github.com/rithinch/.netcore-web-api-example/actions/workflows/dotnet.yml/badge.svg"/></a>
+    <a href="https://codecov.io/gh/rithinch/.netcore-web-api-example">
+  <img src="https://codecov.io/gh/rithinch/.netcore-web-api-example/branch/main/graph/badge.svg?token=LTRBOVNDHY"/>
+</a>
     <a href="https://www.codacy.com/gh/rithinch/.netcore-web-api-example/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rithinch/.netcore-web-api-example&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/3b850ea67d164757af491bc1f9ba7b46"/></a>
     <br>
     <br>
