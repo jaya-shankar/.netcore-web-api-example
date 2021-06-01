@@ -4,7 +4,7 @@
     <br>
     <h1>Pokedex Web API</h1>
     <p>
-		<b>Simple .NET 5 implementation of a service that provides pokemon information.</b>
+		<b>Simple .NET 5 implementation of a service that provides pokemon information. 👾</b>
 	</p>
     <br>
 </div>
@@ -14,14 +14,14 @@ This repo contains an example of a REST API implemented in .NET Core using clean
 
 **Tech Stack:** [.NET 5](https://docs.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-5.0), [Docker](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/?view=aspnetcore-5.0), [Refit](https://github.com/reactiveui/refit), [AutoMapper](https://github.com/AutoMapper/AutoMapper), [Moq](https://github.com/Moq/moq4/wiki/Quickstart)
 
-## Prerequisites
+## Prerequisites ✔️
 
 To run the app locally, you'd need to have **either** of the following installed on your machine:
 
 1. [Docker Desktop](https://docs.docker.com/desktop/#download-and-install) - can build a docker image and spin up a container running the app locally. 
 2. [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0) - can use the dotnet CLI or visual studio to build and run the app.
 
-## Running Locally
+## Running Locally 💻
 
 We first need to get a local copy of this repository either by cloning or downloading the zip files.
 
@@ -38,7 +38,7 @@ The following commands will launch the app on http://localhost:5000
 > dotnet run
 ```
 
-### Docker
+### Docker 🐳
 
 The following commands will build the image and run the app in a docker container.
 
@@ -59,7 +59,7 @@ Example using [httpie](https://httpie.io/):
 ```
 
 
-## Endpoints
+## Endpoints 🔎
 
 Once you run the app, you should be able access the public routes below:
 
@@ -88,7 +88,7 @@ http://localhost:5000/swagger
 
 ![Swagger Documentation UI](images/swagger.png)
 
-## Architecture
+## Architecture 📐
 
 Used [Clean Architecture](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture) approach to organize code into 3 projects.
 
@@ -101,7 +101,7 @@ This project contains only core domain entities (POCO), business logic and requi
 - _Clients/IPokeAPIClient.cs_ - Interface exposing a method to fetch pokemon species from an external source. We don't need to worry about the implementation details of this interface at this layer, it's responsibility of Infrastructure layer. The external source now happens to be PokeAPI, as long as this interface is maintained, it can be easily changed to another source without having to change the PokemonService.
 
 
-With dependencies injected, it's simple to mock them in unit tests and test only the core business logic.
+With dependencies injected, it's simple to mock them in unit tests and test only the core business logic. 😎
 
 For this example, the client interfaces and external models are defined in this layer. But for production, I would have created a much more generic interface and models such as 'IPokemonRepository' instead of directly calling it `IPokeAPIClient`. The infrastructure layer, would implement the interface and can convert the external models into domain specific models. 
 
@@ -136,7 +136,7 @@ AutoMapper has been used to simplify creation of API models from domain entities
 There are multiple deployment options for this application such as hosting in a container independently (AWS ECS or Azure Container Service), adding to an existing Kubernetes cluster etc. We can re-use the inner layers and convert the entire presentation layer into a new serverless API project, if needed. The architecture is flexible.
 
 
-## Unit Tests
+## Unit Tests 🧪
 
 **Pokedex.Application.Core.Test.Unit** includes unit tests for the core business logic.
 
@@ -147,11 +147,11 @@ The tests can be run either through Visual Studio or dotnet CLI.
 > dotnet test
 ```
 
-## Production Ready?
+## Production Ready? 🚀
 
-... Not yet.
+... Not yet. 
 
-The following a few things to consider adding before taking this to production.
+The following a few things to consider adding before taking this to production. 
 
 **External Services Response Caching**
 
@@ -171,9 +171,9 @@ Currently some values like language, habitat are stored as string. In code to ve
 
 When making calls to anything outside of our application such as external thrid party services or data sources, our application has to be fault tolerant. Dependent services can be down, fail, rate limited etc. We need to handle our logic to either fallback to a default value, have a retry policy with a circuit breaker pattern or design internal systems with asynchronous communication that use message queues. 
 
-Currently, if FunTranslation service fails due to rate-limit, then we fallback to use a standard description. But, if PokeAPI service fails, we throw an exception. Instead of throwing an exception we can even log it and fallback to a default value. Either way, we would like to see the exceptions in a some monitoring dashboard.
+Currently, if PokeAPI or FunTranslation service fails due to rate-limit or any reason, then we fallback to use a standard description or default value. We can log such failures and fallback to see exceptions in a monitoring dashboard.
 
-Perhaps for this case, a simple retry policy with default fallback and logging should be good enough.
+Perhaps for this case, a simple retry policy with default fallback and logging should be good enough. 🔱
 
 More information: https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/
 
@@ -191,7 +191,7 @@ Adding on to monitoring above, having service health endpoints are also importan
 
 **Authentication and Authorization**
 
-At the moment, anyone can make requests to this application. Adding an auth mechanism will restrict who can make the requests. The implementation for this largely depends on the overall system architecture. If there is an API gateway, then that can handle the auth and perhaps pass JWTs to internal services which the microservices can validate with a middleware in place. 
+At the moment, anyone can make requests to this application. Adding an auth mechanism will restrict who can make the requests. The implementation for this largely depends on the overall system architecture. If there is an API gateway, then that can handle the auth and perhaps pass JWTs to internal services which the microservices can validate with a middleware in place. 🔒 
 
 **Additional things to consider:**
 

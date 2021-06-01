@@ -18,7 +18,7 @@ namespace Pokedex.Application.Core.Test.Unit.Services
     public class PokemonServiceTest
     {
         private const string CAVE_HABITAT = "cave";
-        private const string ORIGINAL_DESCRIPTION = "This is a \ndescription";
+        private const string ORIGINAL_DESCRIPTION = "This is a\ndescription";
         private const string EXPECTED_DESCRIPTION = "This is a description";
         private const string POKEMON_NAME = "pikachu";
         private const string TRANSLATED_DESCIRPTION = "Translated description, this is.";
@@ -48,18 +48,18 @@ namespace Pokedex.Application.Core.Test.Unit.Services
             });
         }
 
-        private static Pokemon CreatePokemon(string name, string habitat, string description, string language, bool isLegendary = false) => new Pokemon()
+        private static Pokemon CreatePokemon(string name, string habitat, string description, string language, bool isLegendary = false) => new Pokemon
         {
             Name = name,
-            Habitat = new PokemonHabitat()
+            Habitat = new PokemonHabitat
             {
                 Name = habitat
             },
-            Descriptions = description == null ? null : new List<FlavorText>()
+            Descriptions = description == null ? null : new List<FlavorText>
             {
-                new FlavorText()
+                new FlavorText
                 {
-                    Language = new Language()
+                    Language = new Language
                     {
                         Name = language
                     },
@@ -74,9 +74,9 @@ namespace Pokedex.Application.Core.Test.Unit.Services
             Mock<IApiResponse<TranslationResponse>> _Response = new();
 
             _Response.SetupGet(r => r.IsSuccessStatusCode).Returns(translation != null);
-            _Response.SetupGet(r => r.Content).Returns(new TranslationResponse()
+            _Response.SetupGet(r => r.Content).Returns(new TranslationResponse
             {
-                Content = new TranslatedContent()
+                Content = new TranslatedContent
                 {
                     TranslatedText = translation
                 }
@@ -118,14 +118,6 @@ namespace Pokedex.Application.Core.Test.Unit.Services
             PokemonEntity _Entity = await __PokemonService.GetPokemonAsync(POKEMON_NAME);
 
             Assert.AreEqual(string.Empty, _Entity.Description);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public async Task PokemonService_GetPokemonAsync_NotSuccessStatus_ShouldThrowException()
-        {
-            ArrangePokeAPIClientMock(null, HttpStatusCode.InternalServerError);
-            await __PokemonService.GetPokemonAsync(POKEMON_NAME);
         }
 
         [TestMethod]
