@@ -1,5 +1,5 @@
 <div align="center">
-	<img src="images/pokedex.gif" width="200" height="150">
+	<img src="https://rithinpersonalstorage.blob.core.windows.net/images/pokedex.gif" width="200" height="150">
 	<br>
     <br>
     <h1>Pokedex Web API</h1>
@@ -101,7 +101,7 @@ Swagger documentation is also configured. More information on the API endpoints 
 http://localhost:5000/swagger
 ```
 
-![Swagger Documentation UI](images/swagger.png)
+![Swagger Documentation UI](https://rithinpersonalstorage.blob.core.windows.net/images/swagger.png)
 
 ## Architecture 📐
 
